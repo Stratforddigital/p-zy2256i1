@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Cleaning Edinburgh | Silverpoint Cleaning (example redesign)</title>
+<meta name="description" content="Example redesign of the Silverpoint Cleaning website by Stratford Digital. Not the live site.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+/* Self-hosted fonts (SIL Open Font License 1.1, see fonts/OFL-*.txt): Inter 400-700 and Plus Jakarta Sans 700-800, latin subset */
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/plus-jakarta-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  /* Silverpoint's own colours, from their stylesheet */
+  --teal:#0B809B; --teal-dark:#0A6579; --teal-soft:#E6F3F6;
+  --ink:#15222C; --muted:#5E6E79; --bg:#F5F7F9; --paper:#FFFFFF; --line:#E2E8EC;
+  --tone:#EDF1F4; --gold:#D8A419; --wa:#34BE6D; --on-teal:#CDE9F0;
+  --f-head:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --f-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* five sizes */
+  --s-display:clamp(40px,5.9vw,86px);
+  --s-head:clamp(28px,2.6vw,36px);
+  --s-sub:22px; --s-lead:18px; --s-ui:16px; --s-small:14px;
+  --gut:16px; --maxw:1200px; --head-h:68px;
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-expo:cubic-bezier(.16,1,.3,1); --ease-soft:cubic-bezier(.33,1,.68,1);
+  --t-press:140ms; --t-hover:180ms; --t-ui:260ms; --t-reveal:820ms;
+  --bar:0px;
+}
+@media (min-width:760px){:root{--gut:32px}}
+@media (min-width:1000px){:root{--head-h:76px}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:88px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--s-ui)/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+figure{margin:0}
+button,input{font:inherit;color:inherit}
+a{color:var(--teal-dark)}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;letter-spacing:-.025em;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+::selection{background:var(--teal);color:#fff}
+.wrap{max-width:calc(var(--maxw) + 2*var(--gut));margin:0 auto;padding:0 var(--gut)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tab{font-variant-numeric:tabular-nums}
+.m-only{display:inline}.d-only{display:none}
+@media (min-width:1000px){.m-only{display:none}.d-only{display:inline}}
+
+/* ---------- buttons (one shape: fully round) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--teal-dark);color:#fff;font-weight:600;font-size:var(--s-ui);text-decoration:none;cursor:pointer;transition:transform var(--t-press) var(--ease-out),background-color var(--t-hover) ease}
+.btn:active{transform:scale(.97)}
+.btn.small{min-height:44px;padding:0 18px}
+.btn.wide{width:100%}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.wa{background:var(--wa);color:var(--ink)}
+.btn.soft{background:var(--paper);color:var(--ink)}
+.link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--ink);font-weight:600;text-decoration:none;background:none;border:0;padding:0;cursor:pointer;transition:color var(--t-hover) ease}
+.link svg{width:18px;height:18px;color:var(--teal-dark);transition:transform var(--t-ui) var(--ease-out)}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:30;background:var(--paper)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:var(--head-h)}
+.logo{display:block;flex:none;padding:5px 0}
+.logo img{height:34px;width:auto}
+.nav{display:none;gap:26px;margin-left:12px}
+.nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:var(--s-ui);padding:12px 0;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform var(--t-ui) var(--ease-out)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+.top-right .link{display:none}
+@media (min-width:1000px){.nav{display:flex}.top-right .link{display:inline-flex}.logo img{height:38px}}
+
+/* ---------- hero + quote ---------- */
+.hero{background:var(--teal-soft);padding:24px 0 48px}
+.hero-grid{display:grid;gap:18px}
+.hero h1{font-size:var(--s-display);line-height:1.03;letter-spacing:-.035em;max-width:14em}
+.hero-lead{font-size:17px;line-height:1.5;max-width:34em}
+.rating{display:flex;align-items:center;gap:10px;margin-top:14px;font-weight:600}
+.stars{display:flex;gap:2px;color:var(--gold)}
+.stars svg{width:17px;height:17px}
+.trust{display:grid;grid-template-columns:auto auto;justify-content:start;gap:8px 18px;margin:12px 0 0;padding:0;list-style:none;font-size:var(--s-small);font-weight:500}
+.trust li{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.trust svg{width:16px;height:16px;color:var(--teal-dark);flex:none}
+.hero-photo{display:none}
+@keyframes hg-shine{0%,55%{transform:translateX(0)}100%{transform:translateX(1900px)}}
+@keyframes hg-tw{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.86);opacity:.82}}
+@media (min-width:1000px){
+  .hero{padding:64px 0 120px}
+  .hero-grid{grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:0;align-items:start}
+  .hero-head{grid-column:1/-1;margin-bottom:44px}
+  .hero-side{grid-column:1/7;position:sticky;top:116px}
+  .slip-col{grid-column:7/-1;justify-self:end;width:100%;max-width:540px}
+  .hero-lead{font-size:var(--s-lead);line-height:1.55}
+  .rating{margin-top:22px}
+  .trust{gap:8px 28px;font-size:var(--s-ui)}
+  .hero-photo{display:block;margin-top:40px;border-radius:22px;overflow:hidden;background:var(--teal-dark)}
+  .hero-photo svg{display:block;width:100%;height:auto;aspect-ratio:20/9}
+  .hg-shine{animation:hg-shine 11s var(--ease-soft) infinite}
+  .hg-tw{transform-box:fill-box;transform-origin:center;animation:hg-tw 6.5s ease-in-out infinite}
+}
+
+/* the slip: quote that prints as you choose */
+.slip{background:var(--paper);padding:20px 20px 44px;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),97.5% 100%,95% calc(100% - 12px),92.5% 100%,90% calc(100% - 12px),87.5% 100%,85% calc(100% - 12px),82.5% 100%,80% calc(100% - 12px),77.5% 100%,75% calc(100% - 12px),72.5% 100%,70% calc(100% - 12px),67.5% 100%,65% calc(100% - 12px),62.5% 100%,60% calc(100% - 12px),57.5% 100%,55% calc(100% - 12px),52.5% 100%,50% calc(100% - 12px),47.5% 100%,45% calc(100% - 12px),42.5% 100%,40% calc(100% - 12px),37.5% 100%,35% calc(100% - 12px),32.5% 100%,30% calc(100% - 12px),27.5% 100%,25% calc(100% - 12px),22.5% 100%,20% calc(100% - 12px),17.5% 100%,15% calc(100% - 12px),12.5% 100%,10% calc(100% - 12px),7.5% 100%,5% calc(100% - 12px),2.5% 100%,0 calc(100% - 12px))}
+@media (min-width:760px){.slip{padding:30px 32px 52px}}
+.slip-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.slip-title{font-family:var(--f-head);font-size:var(--s-sub);letter-spacing:-.02em;font-weight:700}
+.head-total{display:none;align-items:baseline;gap:6px;white-space:nowrap}
+.head-total small{font-size:var(--s-small);color:var(--muted);font-weight:500}
+.head-total output{font-family:var(--f-head);font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1}
+@media (min-width:1000px){
+  .slip-head{position:sticky;top:var(--head-h);z-index:3;background:var(--paper);margin:-30px -32px 0;padding:22px 32px 14px;box-shadow:0 1px 0 var(--line)}
+  .head-total{display:flex}
+}
+.steps{display:flex;gap:6px;margin:12px 0 18px;padding:0;list-style:none}
+.steps li{flex:1}
+.steps button{width:100%;min-height:44px;border:0;background:none;padding:0 0 10px;text-align:left;cursor:pointer;font-size:var(--s-small);font-weight:600;color:var(--muted)}
+.steps button::before{content:"";display:block;height:4px;border-radius:4px;background:var(--tone);margin-bottom:8px;transition:background-color var(--t-ui) ease}
+.steps button[aria-current="step"]{color:var(--ink)}
+.steps button[aria-current="step"]::before,.steps button.done::before{background:var(--teal)}
+.steps button:disabled{cursor:default}
+.slip.is-done .slip-head,.slip.is-done .steps,.slip.is-done .receipt{display:none}
+.pane[hidden]{display:none}
+.pane{animation:pane-in .5s var(--ease-out) both}
+@keyframes pane-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+fieldset{border:0;margin:0 0 18px;padding:0;min-width:0}
+legend,.q{font-weight:600;font-size:var(--s-ui);margin-bottom:10px;padding:0}
+.svc{display:grid;gap:6px}
+.svc label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;min-height:50px;padding:12px 16px;background:var(--bg);border-radius:14px;cursor:pointer;transition:background-color var(--t-hover) ease,color var(--t-hover) ease,transform var(--t-press) var(--ease-out)}
+.svc label:active{transform:scale(.985)}
+.svc input{position:absolute;opacity:0;pointer-events:none}
+.svc .nm{font-weight:600}
+.svc .pr{font-size:var(--s-small);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.svc .ln{grid-column:1/-1;font-size:var(--s-small);line-height:1.45;color:var(--muted);display:none}
+.svc input:checked+label{background:var(--teal-dark);color:#fff}
+.svc input:checked+label .pr,.svc input:checked+label .ln{color:var(--on-teal)}
+.svc input:checked+label .ln{display:block;animation:pane-in .45s var(--ease-out) both}
+.svc input:focus-visible+label{outline:3px solid var(--teal);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 15px;border-radius:999px;background:var(--bg);font-weight:500;font-size:var(--s-ui);cursor:pointer;transition:background-color var(--t-hover) ease,color var(--t-hover) ease,transform var(--t-press) var(--ease-out)}
+.chip span:active{transform:scale(.96)}
+.chip input:checked+span{background:var(--teal-dark);color:#fff}
+.chip input:focus-visible+span{outline:3px solid var(--teal);outline-offset:2px}
+.chip em{font-style:normal;color:var(--teal-dark);font-weight:600}
+.chip input:checked+span em{color:var(--on-teal)}
+.sizes{display:grid;grid-template-columns:1.6fr repeat(5,1fr);gap:5px;max-width:360px}
+.sizes.three{grid-template-columns:repeat(3,1fr);max-width:170px}
+.sizes .chip span{width:100%;justify-content:center;padding:0 6px}
+.more{border:0;background:none;min-height:44px;padding:0;font-weight:600;color:var(--teal-dark);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.more svg{width:16px;height:16px;transition:transform var(--t-ui) var(--ease-out)}
+.more[aria-expanded="true"] svg{transform:rotate(45deg)}
+.extras{margin-top:4px}
+.extras[hidden],.xlist[hidden]{display:none}
+.xrow{position:relative;display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;min-height:48px;padding:6px 0;border-top:1px solid var(--line);cursor:pointer}
+.xrow input{position:absolute;opacity:0;pointer-events:none}
+.xrow .box{width:22px;height:22px;border-radius:6px;border:2px solid #B4C1CA;display:grid;place-items:center;color:#fff;transition:background-color var(--t-hover) ease,border-color var(--t-hover) ease}
+.xrow .box svg{width:14px;height:14px;opacity:0;transform:scale(.6);transition:opacity var(--t-hover) ease,transform var(--t-ui) var(--ease-out)}
+.xrow input:checked+.box{background:var(--teal-dark);border-color:var(--teal-dark)}
+.xrow input:checked+.box svg{opacity:1;transform:none}
+.xrow input:focus-visible+.box{outline:3px solid var(--teal);outline-offset:2px}
+.xrow .xn{font-weight:500;line-height:1.3}
+.xrow .xp{font-variant-numeric:tabular-nums;color:var(--muted);font-size:var(--s-small);white-space:nowrap}
+.xrow input:checked~.xp{color:var(--ink);font-weight:600}
+.xall{margin-top:2px;border-top:1px solid var(--line);width:100%}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.days .chip span{width:100%;flex-direction:column;justify-content:center;gap:0;min-height:58px;padding:6px 4px;border-radius:14px;line-height:1.2}
+.days .chip b{font-size:var(--s-small);font-weight:500;color:var(--muted)}
+.days .chip input:checked+span b{color:var(--on-teal)}
+.field{display:block;margin-bottom:16px}
+.field span{display:block;font-weight:600;margin-bottom:8px}
+.field span small{font-size:var(--s-small);font-weight:500;color:var(--muted);margin-left:4px}
+.field input{width:100%;min-height:52px;padding:0 16px;border:2px solid transparent;border-radius:14px;background:var(--bg);font-size:16px;transition:border-color var(--t-hover) ease,background-color var(--t-hover) ease}
+.field input:focus{outline:none;border-color:var(--teal);background:var(--paper)}
+.field input[aria-invalid="true"]{border-color:#B4352A}
+.hint{display:block;font-size:var(--s-small);color:var(--muted);margin-top:8px;min-height:1.4em}
+.hint.ok{color:#126B3F}
+.err{display:block;font-size:var(--s-small);color:#B4352A;margin-top:8px;font-weight:500}
+.err:empty{display:none}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
+.back{border:0;background:none;min-height:44px;padding:0;font-weight:600;color:var(--muted);cursor:pointer}
+.cta-row{margin-top:18px}
+/* on phones the bottom bar carries Next and the price, so the in-form copies step aside */
+@media (max-width:999px){.js .fwd{display:none}.js .cta-row{display:none}}
+
+/* receipt */
+.receipt{margin-top:24px;padding-top:22px;position:relative}
+.receipt::before{content:"";position:absolute;left:-20px;right:-20px;top:0;height:8px;background:var(--bg)}
+@media (min-width:760px){.receipt::before{left:-32px;right:-32px}}
+.receipt h3{font-size:var(--s-ui);font-family:var(--f-body);letter-spacing:0;font-weight:600;margin-bottom:12px}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:flex;justify-content:space-between;gap:16px;padding:7px 0;animation:row-in .45s var(--ease-out) both}
+.rows li small{display:block;color:var(--muted);font-size:var(--s-small)}
+.rows li .amt{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:500}
+@keyframes row-in{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px;padding-top:14px;position:relative}
+.total::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--ink)}
+.total span{font-weight:600}
+.total output{font-family:var(--f-head);font-size:var(--s-head);font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.note{font-size:var(--s-small);color:var(--muted);margin:8px 0 18px;line-height:1.5}
+
+/* done state */
+.done-box{padding:4px 0 0}
+.done-box:focus{outline:none}
+.tick{width:52px;height:52px;border-radius:50%;background:var(--teal-dark);color:#fff;display:grid;place-items:center;margin-bottom:16px;animation:pop .6s var(--ease-expo) both}
+.tick svg{width:26px;height:26px}
+.tick path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s .25s var(--ease-out) forwards}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done-box h3{font-size:var(--s-head);line-height:1.1}
+.done-box p{font-size:var(--s-ui);line-height:1.55;margin-top:10px;color:#2B3944}
+.sum{margin-top:20px;background:var(--bg);border-radius:14px;padding:6px 16px 16px}
+.sum-top{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--ink);color:#fff;min-height:44px;padding:10px 14px;margin:10px -6px 8px;border-radius:10px;font-weight:600}
+.sum-top span:last-child{white-space:nowrap;color:var(--on-teal)}
+.sum .rows li{animation:none;border-bottom:1px solid var(--line)}
+.sum .rows li:last-child{border-bottom:0}
+.sum .total output{font-size:28px}
+.done-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;margin-top:14px}
+.again{border:0;background:none;min-height:44px;padding:0;color:var(--muted);font-size:var(--s-small);font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.done-foot .link{display:none}
+@media (min-width:1000px){.done-foot .link{display:inline-flex}}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.sec{padding:68px 0}
+@media (min-width:1000px){.sec{padding:150px 0}}
+.sec h2{font-size:var(--s-head);line-height:1.1}
+.g12{display:grid;gap:24px}
+.g12>*,.hero-grid>*{min-width:0}
+@media (min-width:1000px){.g12{grid-template-columns:repeat(12,1fr);column-gap:24px}}
+.para{font-size:17px;line-height:1.55;margin-top:16px;max-width:30em}
+@media (min-width:1000px){.para{font-size:var(--s-lead);margin-top:18px}}
+
+/* prices */
+@media (min-width:1000px){.prices .lhs{grid-column:1/5;position:sticky;top:120px;align-self:start}.prices .rhs{grid-column:6/-1}}
+.svc-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.svc-list li{padding:26px 0;border-top:1px solid var(--line)}
+.svc-list li:first-child{border-top:0;padding-top:0}
+.svc-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+.svc-list h3{font-size:var(--s-sub);line-height:1.2}
+.svc-list .from{font-weight:500;color:var(--muted);white-space:nowrap}
+.svc-list .from b{font-family:var(--f-head);font-size:var(--s-sub);letter-spacing:-.02em;color:var(--ink);font-weight:700}
+.svc-list p{margin-top:8px;max-width:36em}
+.grid-prices{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:16px 0 0;padding:0}
+@media (min-width:640px){.grid-prices{grid-template-columns:repeat(6,1fr)}}
+.grid-prices div{background:var(--paper);border-radius:10px;padding:8px 10px}
+.grid-prices dt{font-size:13px;color:var(--muted);font-weight:500}
+.grid-prices dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.svc-list .more-note{margin-top:10px;font-size:var(--s-small);color:var(--muted);max-width:44em}
+.svc-list .pick{margin-top:6px}
+.extras-list{margin-top:48px;padding:24px 20px;background:var(--paper)}
+@media (min-width:760px){.extras-list{padding:36px 40px}}
+.extras-list h3{font-size:var(--s-sub)}
+.extras-list ul{list-style:none;margin:12px 0 0;padding:0;columns:1;column-gap:48px}
+@media (min-width:640px){.extras-list ul{columns:2}}
+.extras-list li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.extras-list li span:last-child{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.extras-list li small{font-weight:500;color:var(--muted);font-size:var(--s-small)}
+@media (max-width:999px){.prices .rhs{margin-top:8px}}
+
+/* how it works: itinerary slip on ink */
+.how{background:var(--ink);color:#fff}
+@media (min-width:1000px){.how .lhs{grid-column:1/6}.how .rhs{grid-column:7/12}}
+.how .para{color:#D7E1E7}
+.how .slip{color:var(--ink);padding-bottom:52px}
+.it h3{font-size:var(--s-ui);font-family:var(--f-body);letter-spacing:0;font-weight:700;margin:22px 0 4px}
+.it h3:first-child{margin-top:0}
+.it ul{list-style:none;margin:0;padding:0}
+.it li{display:flex;align-items:baseline;gap:10px;padding:6px 0}
+.it li .what{flex:0 1 auto}
+.it li .dots{flex:1 1 20px;overflow:hidden;white-space:nowrap;color:#AAB7C0;letter-spacing:3px;min-width:20px}
+.it li .dots::before{content:"··································································································"}
+.it li .val{flex:none;font-variant-numeric:tabular-nums;color:var(--muted);font-size:var(--s-small);text-align:right}
+@media (max-width:519px){
+  .it li{flex-direction:column;gap:0;padding:7px 0}
+  .it li .dots{display:none}
+  .it li .val{text-align:left}
+}
+.final{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--ink);color:#fff;min-height:46px;padding:10px 14px;margin-top:22px;border-radius:10px;font-weight:600}
+.final span:last-child{white-space:nowrap}
+@media (max-width:999px){.how .rhs{margin-top:8px}}
+
+/* proof: one column of plain lines on a phone, two on desktop */
+@media (min-width:1000px){.proof .lhs{grid-column:1/5}.proof .rhs{grid-column:6/-1;columns:2;column-gap:48px}}
+.proof .grp{break-inside:avoid;margin-bottom:28px}
+.proof .lab{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.proof ul{list-style:none;margin:0;padding:0}
+.proof li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-weight:500;font-size:17px;line-height:1.4}
+.proof li svg{width:16px;height:16px;color:var(--teal-dark);flex:none}
+.proof .stars svg{width:15px;height:15px;color:var(--gold)}
+
+/* areas */
+.areas{background:var(--paper)}
+@media (min-width:1000px){.areas .lhs{grid-column:1/6}.areas .rhs{grid-column:7/-1}}
+.alist{list-style:none;margin:24px 0 0;padding:0;columns:2;column-gap:24px}
+.alist li{break-inside:avoid}
+.alist button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;border:0;background:none;padding:0;text-align:left;font-size:17px;font-weight:500;cursor:pointer;color:var(--ink);transition:color var(--t-hover) ease}
+.alist button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--tone);flex:none;transition:background-color var(--t-hover) ease,transform var(--t-ui) var(--ease-out)}
+.alist button[aria-pressed="true"]::before{background:var(--teal);transform:scale(1.25)}
+.alist button[aria-pressed="true"]{color:var(--teal-dark)}
+.pc{margin-top:20px;font-size:var(--s-ui);color:var(--muted)}
+.ask{margin-top:10px;font-weight:600}
+.frame{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--teal-soft);border-radius:22px}
+.frame svg{display:block;width:100%;height:100%}
+.frame .pt circle.dot{fill:#9CC7D2;transition:fill .6s ease,r .6s var(--ease-out)}
+.frame .pt circle.ring{fill:none;stroke:var(--teal);stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}
+.frame .pt text{font:500 11px/1 var(--f-body);fill:#5E6E79;transition:fill .6s ease}
+.frame .pt.on circle.dot{fill:var(--teal-dark);r:7px}
+.frame .pt.on circle.ring{animation:ring 2.4s var(--ease-out) infinite}
+.frame .pt.on text{fill:var(--ink);font-weight:700}
+@keyframes ring{0%{opacity:.75;transform:scale(.6)}100%{opacity:0;transform:scale(2.4)}}
+.cap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:var(--s-small);color:var(--muted)}
+.cap b{color:var(--ink);font-weight:600}
+@media (max-width:999px){.areas .rhs{margin-top:8px}}
+
+/* faq */
+@media (min-width:1000px){.faq .lhs{grid-column:1/4}.faq .rhs{grid-column:5/-1;columns:2;column-gap:56px}}
+.faq .rhs p{max-width:64ch;break-inside:avoid;margin-bottom:20px;font-size:var(--s-ui);line-height:1.6}
+.faq .rhs b{font-weight:600}
+
+/* contact band: one line, two buttons */
+.talk{background:var(--teal-soft)}
+.talk .say{font-size:clamp(24px,2.6vw,36px);line-height:1.2;max-width:20em;text-wrap:balance}
+.talk .act{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.talk .where{margin-top:16px;font-size:var(--s-small);color:var(--muted)}
+@media (max-width:519px){.talk .act .btn{flex:1 1 0;padding:0 14px}}
+
+/* footer */
+.foot{padding:72px 0 calc(32px + var(--bar))}
+@media (min-width:1000px){.foot{padding-top:96px}}
+.foot .line{display:grid;gap:6px;font-size:var(--s-ui)}
+.foot .line a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.foot .links{display:flex;flex-wrap:wrap;gap:0 24px}
+.foot .m{color:var(--muted)}
+.foot .label{margin-top:24px;font-size:var(--s-ui);font-weight:600;color:var(--ink)}
+@media (min-width:1000px){.foot .line{grid-template-columns:1fr auto 1fr;align-items:center}.foot .line .yr{text-align:right}}
+
+/* bottom bar on phones: Call / WhatsApp everywhere; next to the quote it also carries the price and the next step */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;padding:8px var(--gut) calc(8px + env(safe-area-inset-bottom));background:var(--paper);box-shadow:0 -1px 0 var(--line)}
+.bar .grp{grid-area:1/1;display:grid;gap:8px;align-items:center;transition:opacity .28s var(--ease-out),transform .28s var(--ease-out),visibility 0s}
+.bar .grp[aria-hidden="true"]{opacity:0;transform:translateY(10px);visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s}
+.bar .contact{grid-template-columns:1fr 1fr}
+.bar .quote{grid-template-columns:48px 48px auto 1fr}
+.bar .btn{min-height:48px;padding:0 12px}
+.bar .call{background:var(--bg);color:var(--ink)}
+.ibtn{width:48px;height:48px;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:var(--bg);color:var(--ink);transition:transform var(--t-press) var(--ease-out)}
+.ibtn:active{transform:scale(.94)}
+.ibtn.wa{background:var(--wa)}
+.ibtn svg{width:20px;height:20px}
+.bprice{display:flex;flex-direction:column;line-height:1;padding:0 4px 0 6px}
+.bprice small{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:3px}
+.bprice output{font-family:var(--f-head);font-size:24px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.bar [hidden]{display:none}
+@media (max-width:999px){:root{--bar:64px}}
+@media (min-width:1000px){.bar{display:none}}
+
+/* hover only where there is a mouse, so a tap never leaves a tint behind */
+@media (hover:hover){
+  .btn:hover{background:#08556A}
+  .btn.wa:hover{background:#2EAC62}
+  .btn.soft:hover{background:var(--tone)}
+  .bar .call:hover{background:var(--tone)}
+  .link:hover{color:var(--teal-dark)}
+  .link:hover svg{transform:translateX(2px)}
+  .nav a:hover::after{transform:scaleX(1)}
+  .svc label:hover{background:var(--tone)}
+  .svc input:checked+label:hover{background:#095B6E}
+  .chip span:hover{background:var(--tone)}
+  .chip input:checked+span:hover{background:#095B6E}
+  .field input:hover{background:var(--tone)}
+  .field input:focus:hover{background:var(--paper)}
+  .back:hover{color:var(--ink)}
+  .again:hover{color:var(--ink)}
+  .xrow:hover .box{border-color:var(--teal)}
+  .alist button:hover::before{background:var(--teal);transform:scale(1.25)}
+  .foot .line a:hover{color:var(--teal-dark)}
+}
+
+/* entrances: only when script runs; content stays visible without it */
+.js [data-rise]{opacity:0;transform:translateY(24px)}
+.js [data-rise].in{opacity:1;transform:none;transition:opacity var(--t-reveal) var(--ease-out),transform var(--t-reveal) var(--ease-expo);transition-delay:calc(var(--i,0) * 80ms)}
+@media (prefers-reduced-motion:reduce){
+  .js [data-rise]{opacity:1;transform:none}
+  *,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important}
+  .frame .pt.on circle.ring{animation:none;opacity:.5;transform:scale(1.6)}
+  .hg-shine,.hg-tw{animation:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Silverpoint Cleaning, back to top"><img src="silverpoint-logo-transparent.png" width="803" height="210" alt="Silverpoint Cleaning"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#prices">Prices</a>
+      <a href="#how">How booking works</a>
+      <a href="#areas">Areas</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <div class="top-right">
+      <button class="link js-call" type="button"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call us</button>
+      <button class="link js-wa" type="button"><svg aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp us</button>
+      <a class="btn small" href="#quote">Get your price</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap hero-grid">
+    <div class="hero-head">
+      <h1 id="h1" data-rise>Professional house cleaning in Edinburgh</h1>
+    </div>
+    <div class="hero-side">
+      <p class="hero-lead" data-rise style="--i:1"><span class="d-only">Standard cleans, one-off deep cleans and end of tenancy cleans from vetted, insured local cleaners. </span>See your price, pick a day, and we'll be in touch to confirm.</p>
+      <div class="rating" data-rise style="--i:2"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span>5.0 on Google</span></div>
+      <ul class="trust" data-rise style="--i:3">
+        <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Fully insured</li>
+        <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Vetted cleaners</li>
+        <li><svg aria-hidden="true"><use href="#i-tick"/></svg>We bring everything</li>
+        <li><svg aria-hidden="true"><use href="#i-tick"/></svg>24-hour guarantee</li>
+      </ul>
+      <div class="hero-photo" data-rise style="--i:4" aria-hidden="true">
+        <!-- our own illustration: brand teal, soft light and the sparkle from their logo; no photos -->
+        <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <defs>
+            <linearGradient id="hg-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B809B"/><stop offset=".55" stop-color="#0A6579"/><stop offset="1" stop-color="#08495A"/></linearGradient>
+            <radialGradient id="hg-glow" cx=".72" cy=".34" r=".55"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".30"/><stop offset=".45" stop-color="#CDE9F0" stop-opacity=".10"/><stop offset="1" stop-color="#CDE9F0" stop-opacity="0"/></radialGradient>
+            <linearGradient id="hg-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+            <path id="hg-spark" d="M0-1C.08-.3.3-.08 1 0 .3.08.08.3 0 1-.08.3-.3.08-1 0-.3-.08-.08-.3 0-1z"/>
+          </defs>
+          <rect width="1200" height="540" fill="url(#hg-bg)"/>
+          <rect width="1200" height="540" fill="url(#hg-glow)"/>
+          <g fill="none" stroke="#CDE9F0" stroke-opacity=".16" stroke-width="1.5">
+            <circle cx="864" cy="184" r="150"/><circle cx="864" cy="184" r="240"/><circle cx="864" cy="184" r="340"/><circle cx="864" cy="184" r="450"/>
+          </g>
+          <circle cx="150" cy="560" r="260" fill="#CDE9F0" fill-opacity=".07"/>
+          <circle cx="1120" cy="610" r="210" fill="#08495A" fill-opacity=".45"/>
+          <g transform="rotate(18)"><rect class="hg-shine" x="-420" y="-260" width="260" height="1100" fill="url(#hg-shine)"/></g>
+          <g fill="#FFFFFF">
+            <g transform="translate(864 184) scale(64)"><use class="hg-tw" href="#hg-spark"/></g>
+            <g transform="translate(958 282) scale(24)" fill-opacity=".8"><use class="hg-tw" style="animation-delay:-2.2s" href="#hg-spark"/></g>
+            <g transform="translate(776 276) scale(13)" fill-opacity=".65"><use class="hg-tw" style="animation-delay:-4.1s" href="#hg-spark"/></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="slip-col" id="quote" data-rise style="--i:2">
+      <form class="slip" id="qform" novalidate aria-labelledby="qtitle">
+        <div class="slip-head">
+          <h2 class="slip-title" id="qtitle">Your price, then your day</h2>
+          <p class="head-total" aria-hidden="true"><small>From</small><output data-total class="tab">£210</output></p>
+        </div>
+        <ol class="steps" aria-label="Quote steps">
+          <li><button type="button" data-go="0" aria-current="step">Your clean</button></li>
+          <li><button type="button" data-go="1" disabled>Your day</button></li>
+          <li><button type="button" data-go="2" disabled>Your details</button></li>
+        </ol>
+
+        <!-- step: your clean -->
+        <div class="pane" data-pane="0">
+          <fieldset>
+            <legend>What needs cleaning?</legend>
+            <div class="svc" id="svc"></div>
+          </fieldset>
+          <fieldset id="freq-set" hidden>
+            <legend>How often?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="freq" value="Weekly" checked><span>Weekly <em>Save 10%</em></span></label>
+              <label class="chip"><input type="radio" name="freq" value="Fortnightly"><span>Fortnightly <em>Save 10%</em></span></label>
+              <label class="chip"><input type="radio" name="freq" value="Monthly"><span>Monthly</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Bedrooms</legend>
+            <div class="sizes" id="beds"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Bathrooms</legend>
+            <div class="sizes three" id="baths"></div>
+          </fieldset>
+          <button type="button" class="more" id="more" aria-expanded="false" aria-controls="extras"><svg aria-hidden="true"><use href="#i-plus"/></svg>Add extras (optional)</button>
+          <div class="extras" id="extras" hidden>
+            <div class="xlist" id="xcommon"></div>
+            <div class="xlist" id="xrest" hidden></div>
+            <button type="button" class="more xall" id="xall" aria-expanded="false" aria-controls="xrest">Show all 12 extras</button>
+          </div>
+          <div class="cta-row"><button type="button" class="btn wide fwd" data-next="1">Next: pick a day<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </div>
+
+        <!-- step: your day -->
+        <div class="pane" data-pane="1" hidden>
+          <fieldset>
+            <legend>Which day suits you?</legend>
+            <div class="days" id="days"></div>
+            <span class="err" id="day-err"></span>
+          </fieldset>
+          <fieldset>
+            <legend>What time of day?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="tod" value="morning" checked><span>Morning</span></label>
+              <label class="chip"><input type="radio" name="tod" value="afternoon"><span>Afternoon</span></label>
+              <label class="chip"><input type="radio" name="tod" value="evening"><span>Evening</span></label>
+            </div>
+          </fieldset>
+          <label class="field"><span>Postcode <small>optional</small></span>
+            <input id="pc" name="postcode" autocomplete="postal-code" inputmode="text" placeholder="EH10 4AA" aria-describedby="pc-hint pc-err">
+            <span class="hint" id="pc-hint" aria-live="polite"></span><span class="err" id="pc-err"></span>
+          </label>
+          <div class="navrow"><button type="button" class="back" data-go="0">Back</button><button type="button" class="btn fwd" data-next="2">Next: your details<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </div>
+
+        <!-- step: your details -->
+        <div class="pane" data-pane="2" hidden>
+          <label class="field"><span>Your name</span><input id="nm" name="name" autocomplete="name" aria-describedby="nm-err"><span class="err" id="nm-err"></span></label>
+          <label class="field"><span>Mobile or email</span><input id="ct" name="contact" autocomplete="tel" aria-describedby="ct-err"><span class="err" id="ct-err"></span></label>
+          <div class="navrow"><button type="button" class="back" data-go="1">Back</button><button type="submit" class="btn fwd">Send request</button></div>
+        </div>
+
+        <!-- done -->
+        <div class="pane" data-pane="3" hidden>
+          <div class="done-box" role="status" tabindex="-1" id="done">
+            <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3 id="done-h">Thanks, we'll be in touch.</h3>
+            <p id="done-p"></p>
+            <div class="sum">
+              <div class="sum-top"><span>Request received</span><span id="sum-day"></span></div>
+              <ul class="rows" id="sum-rows"></ul>
+              <div class="total"><span>From</span><output id="sum-total" class="tab"></output></div>
+            </div>
+            <div class="done-foot">
+              <button type="button" class="link js-call"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call us</button>
+              <button type="button" class="link js-wa"><svg aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp us</button>
+              <button type="button" class="again" id="again">Start again</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="receipt" aria-live="polite">
+          <h3>Your quote</h3>
+          <ul class="rows" id="rows"></ul>
+          <p class="note">Bedrooms and bathrooms set the price, with one bathroom included. Extra living rooms, separate toilets, more floors or the home's condition can add to it, and we confirm the price when we confirm the time. No VAT is added.</p>
+          <div class="total"><span>From</span><output id="total" data-total class="tab">£210</output></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec prices" id="prices" aria-labelledby="h-prices">
+  <div class="wrap g12">
+    <div class="lhs">
+      <h2 id="h-prices" data-rise>Four cleans, priced up front</h2>
+      <p class="para" data-rise style="--i:1">Every price is bedrooms plus bathrooms plus any extras. No hourly rate, and no surprise at the end: Silverpoint Cleaning Ltd is not VAT-registered, so the price you see is the price you pay.</p>
+    </div>
+    <div class="rhs">
+      <ul class="svc-list" id="svc-list"></ul>
+      <div class="extras-list" data-rise>
+        <h3>Extras, any clean</h3>
+        <ul id="extras-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec how" id="how" aria-labelledby="h-how">
+  <div class="wrap g12">
+    <div class="lhs">
+      <h2 id="h-how" data-rise>How booking works</h2>
+      <p class="para" data-rise style="--i:1">One route from your price to a clean home. The form, a call and a WhatsApp all end in the same place: a day that suits you, confirmed by us.</p>
+    </div>
+    <div class="rhs">
+      <div class="slip it" data-rise style="--i:2">
+        <h3>Now</h3>
+        <ul>
+          <li><span class="what">Choose your clean and see the price</span><span class="dots" aria-hidden="true"></span><span class="val">1 minute</span></li>
+          <li><span class="what">Pick a day and a time of day</span><span class="dots" aria-hidden="true"></span><span class="val">Mon–Sun</span></li>
+          <li><span class="what">Leave your name and a number</span><span class="dots" aria-hidden="true"></span><span class="val">2 boxes</span></li>
+        </ul>
+        <h3>Next</h3>
+        <ul>
+          <li><span class="what">We call or message to confirm your time</span><span class="dots" aria-hidden="true"></span><span class="val">Usually a few hours</span></li>
+        </ul>
+        <h3>On the day</h3>
+        <ul>
+          <li><span class="what">Your cleaner brings products, cloths, hoover and mop</span><span class="dots" aria-hidden="true"></span><span class="val">Everything</span></li>
+          <li><span class="what">Pay by card, never cash to the cleaner</span><span class="dots" aria-hidden="true"></span><span class="val">Card</span></li>
+        </ul>
+        <h3>Within 24 hours</h3>
+        <ul>
+          <li><span class="what">Not right? Tell us and we come back</span><span class="dots" aria-hidden="true"></span><span class="val">Free</span></li>
+        </ul>
+        <div class="final"><span>A clean home, priced up front</span><span>No VAT</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec proof" aria-labelledby="h-proof">
+  <div class="wrap g12">
+    <div class="lhs"><h2 id="h-proof" data-rise>What you can count on</h2></div>
+    <div class="rhs">
+      <div class="grp" data-rise><p class="lab">Who comes</p><ul><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Vetted local cleaners</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Interviewed and reference-checked</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>The same cleaner for regular cleans</li></ul></div>
+      <div class="grp" data-rise style="--i:1"><p class="lab">What's covered</p><ul><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Fully insured</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Public liability and accidental damage cover</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>We bring everything</li></ul></div>
+      <div class="grp" data-rise style="--i:2"><p class="lab">What you pay</p><ul><li><svg aria-hidden="true"><use href="#i-tick"/></svg>The price you see, no VAT added</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Card, never cash</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Move a visit free up to 24 hours before</li></ul></div>
+      <div class="grp" data-rise style="--i:3"><p class="lab">If it's not right</p><ul><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Tell us within 24 hours</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>We come back, free</li><li><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>5.0 on Google</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec areas" id="areas" aria-labelledby="h-areas">
+  <div class="wrap g12">
+    <div class="lhs">
+      <h2 id="h-areas" data-rise>Where we clean</h2>
+      <p class="para" data-rise style="--i:1">Edinburgh and the Lothians: all of Edinburgh and the surrounding towns.</p>
+      <ul class="alist" id="alist" data-rise style="--i:2"></ul>
+      <p class="pc" data-rise style="--i:3">Postcodes on our list: EH3, EH4, EH5, EH6, EH8, EH9, EH10, EH12, EH13, EH15.</p>
+      <p class="ask" data-rise style="--i:4">Not on the list? Ask us. We usually can.</p>
+    </div>
+    <figure class="rhs" data-rise style="--i:2">
+      <div class="frame" id="frame">
+        <!-- our own drawing: the ten named areas, roughly where they sit around the city centre (not to scale) -->
+        <svg viewBox="0 0 400 300" role="img" aria-label="Sketch of the ten areas we name, around Edinburgh city centre, not to scale" focusable="false">
+          <defs>
+            <pattern id="ar-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#0B809B" fill-opacity=".14"/></pattern>
+            <radialGradient id="ar-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#ar-dots)"/>
+          <circle cx="205" cy="150" r="150" fill="url(#ar-glow)"/>
+          <g fill="none" stroke="#0B809B" stroke-opacity=".16" stroke-width="1" stroke-dasharray="2 5">
+            <circle cx="205" cy="150" r="48"/><circle cx="205" cy="150" r="96"/><circle cx="205" cy="150" r="144"/>
+          </g>
+          <g transform="translate(205 150)" fill="#0A6579"><path d="M0-7C.6-2.4 2.4-.6 7 0 2.4.6.6 2.4 0 7-.6 2.4-2.4.6-7 0-2.4-.6-.6-2.4 0-7z"/></g>
+          <text x="205" y="172" text-anchor="middle" style="font:600 9px/1 var(--f-body);letter-spacing:.12em;fill:#0A6579">CITY CENTRE</text>
+          <g id="pts"></g>
+        </svg>
+      </div>
+      <figcaption class="cap"><b id="cap">Stockbridge</b><span>Edinburgh</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec faq" id="questions" aria-labelledby="h-faq">
+  <div class="wrap g12">
+    <div class="lhs"><h2 id="h-faq" data-rise>Questions, answered</h2></div>
+    <div class="rhs" data-rise style="--i:1">
+      <p><b>How is the price worked out?</b> Bedrooms plus bathrooms plus any extras you add. One bathroom is included, and there is no hourly rate.</p>
+      <p><b>Do you add VAT?</b> No. Silverpoint Cleaning Ltd is not VAT-registered, so the price you see is the price you pay.</p>
+      <p><b>What do you bring?</b> Everything: products, cloths, hoover and mop.</p>
+      <p><b>Are you insured?</b> Yes. Every job has public liability insurance and accidental damage cover.</p>
+      <p><b>Who are the cleaners?</b> Vetted local cleaners, interviewed and reference-checked. If you have regular cleans, you get a named cleaner.</p>
+      <p><b>What if something isn't right?</b> Tell us within 24 hours and we'll come back and put it right, free.</p>
+      <p><b>Can I move a visit?</b> Yes, free, up to 24 hours before.</p>
+      <p><b>How do I pay?</b> By card. You never pay cash to the cleaner.</p>
+      <p><b>How do regular cleans start?</b> Standard Cleaning starts with one deep clean, then weekly, fortnightly or monthly visits. Weekly and fortnightly save 10%; monthly is the standard price.</p>
+      <p><b>When are you open?</b> Monday to Sunday, 8am to 8pm.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec talk" aria-labelledby="h-talk">
+  <div class="wrap">
+    <h2 class="say" id="h-talk" data-rise>Rather talk it through? Call or WhatsApp us any day, 8am to 8pm.</h2>
+    <div class="act" data-rise style="--i:1">
+      <button type="button" class="btn js-call"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call us</button>
+      <button type="button" class="btn wa js-wa"><svg aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp us</button>
+    </div>
+    <p class="where" data-rise style="--i:2">South Charlotte Street, Edinburgh</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="line">
+      <span>Silverpoint Cleaning Ltd, Edinburgh</span>
+      <nav class="links" aria-label="Footer"><a href="#prices">Prices</a><a href="#how">How booking works</a><a href="#areas">Areas</a><a href="#questions">Questions</a></nav>
+      <span class="yr m">© 2026</span>
+    </div>
+    <p class="label">Example redesign by Stratford Digital. Not the live site.</p>
+  </div>
+</footer>
+
+<div class="bar" id="bar" aria-label="Contact">
+  <div class="grp contact" id="bar-contact">
+    <button type="button" class="btn call js-call"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call us</button>
+    <button type="button" class="btn wa js-wa"><svg aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp us</button>
+  </div>
+  <div class="grp quote" id="bar-quote" aria-hidden="true" inert>
+    <button type="button" class="ibtn call js-call" aria-label="Call us"><svg aria-hidden="true"><use href="#i-phone"/></svg></button>
+    <button type="button" class="ibtn wa js-wa" aria-label="WhatsApp us"><svg aria-hidden="true"><use href="#i-chat"/></svg></button>
+    <p class="bprice"><small>From</small><output data-total class="tab">£210</output></p>
+    <button type="button" class="btn" id="bar-next"><span id="bar-next-t">Pick a day</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <button type="submit" form="qform" class="btn" id="bar-send" hidden>Send request</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone = window.matchMedia('(max-width: 999px)');
+
+  /* ---------- data: as shown on silverpointcleaning.co.uk and its quote form (17.11.2026) ---------- */
+  var SERVICES = [
+    {id:'standard', name:'Standard Cleaning', unit:'a visit, weekly or fortnightly', line:'Weekly, fortnightly or monthly visits. Same cleaner where possible. Starts with one deep clean.'},
+    {id:'deep', name:'Deep Cleaning', unit:'one-off', line:'A top-to-bottom clean for homes that need more than the usual. Skirting, grout, behind appliances.'},
+    {id:'eot', name:'End of Tenancy Cleaning', unit:'one-off', line:'For tenants and landlords. Cleaned to inventory standard so the handover is straightforward.'},
+    {id:'movein', name:'Move-In Cleaning', unit:'one-off', line:"Before the boxes arrive. The whole property cleaned while it's empty."}
+  ];
+  /* their quote form's price table: bedrooms, extra bathrooms; weekly and fortnightly save 10% */
+  var SIZES = ['Studio','1','2','3','4','5'];
+  var PRICE = {
+    standard:{beds:{Studio:95,'1':95,'2':100,'3':117,'4':133,'5':155.56}, baths:{'2':15,'3':30}},
+    deep:{beds:{Studio:130,'1':150,'2':210,'3':235,'4':280,'5':300}, baths:{'2':40,'3':80}},
+    eot:{beds:{Studio:189,'1':259,'2':299,'3':359,'4':420,'5':495}, baths:{'2':50,'3':100}},
+    movein:{beds:{Studio:130,'1':150,'2':210,'3':235,'4':280,'5':300}, baths:{'2':40,'3':80}}
+  };
+  function price(id, beds, baths, freq){
+    var p = PRICE[id], t = p.beds[beds] + (p.baths[baths] || 0);
+    if (id==='standard' && freq!=='Monthly') t *= 0.9;
+    return Math.ceil(Math.round(t*100)/100 - 0.0001);
+  }
+  var EXTRAS = [
+    ['Inside oven',45,'each'],['Inside double oven',55],['Inside fridge',27,'each'],['Inside cupboards',40],
+    ['Interior windows (glass only)',20],['Windows, frames & tracks',10,'each'],['Wet wipe blinds',8,'each'],['Wall wipe-down',20],
+    ['Heavy wall mark removal',10,'per room'],['Dishwasher',15],['Washing machine',15],['Dishes',5]
+  ];
+  var COMMON = [0,2,3,4];
+  var AREAS = ['Morningside','Bruntsfield','Newington','Leith','Stockbridge','Portobello','Corstorphine','Colinton','Murrayfield','Trinity'];
+  var LISTED = ['EH3','EH4','EH5','EH6','EH8','EH9','EH10','EH12','EH13','EH15'];
+
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var esc = function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var unitTxt = function(e){return '£'+e[1]+(e[2]?' '+e[2]:'')};
+  var sizeName = function(b){return b==='Studio' ? 'Studio' : b+' bed'};
+
+  /* ---------- build the quote controls ---------- */
+  $('#svc').innerHTML = SERVICES.map(function(s){
+    return '<input type="radio" name="service" id="s-'+s.id+'" value="'+s.id+'"'+(s.id==='deep'?' checked':'')+'>'+
+      '<label for="s-'+s.id+'"><span class="nm">'+s.name+'</span><span class="pr" data-pr="'+s.id+'"></span><span class="ln">'+s.line+'</span></label>';
+  }).join('');
+  $('#beds').innerHTML = SIZES.map(function(n){return '<label class="chip"><input type="radio" name="beds" value="'+n+'"'+(n==='2'?' checked':'')+' aria-label="'+(n==='Studio'?'Studio':n+' bedroom'+(n==='1'?'':'s'))+'"><span>'+n+'</span></label>'}).join('');
+  $('#baths').innerHTML = ['1','2','3'].map(function(n){return '<label class="chip"><input type="radio" name="baths" value="'+n+'"'+(n==='1'?' checked':'')+' aria-label="'+n+' bathroom'+(n==='1'?'':'s')+'"><span>'+n+'</span></label>'}).join('');
+  var tickSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  function xrow(i){ var e = EXTRAS[i]; return '<label class="xrow"><input type="checkbox" name="extra" value="'+i+'"><span class="box">'+tickSvg+'</span><span class="xn">'+esc(e[0])+'</span><span class="xp">'+unitTxt(e)+'</span></label>'; }
+  $('#xcommon').innerHTML = COMMON.map(xrow).join('');
+  $('#xrest').innerHTML = EXTRAS.map(function(e,i){return i}).filter(function(i){return COMMON.indexOf(i)<0}).map(xrow).join('');
+
+  /* prices section, from the same data */
+  $('#svc-list').innerHTML = SERVICES.map(function(s,i){
+    var freq = s.id==='standard' ? 'Weekly' : null;
+    var cells = SIZES.map(function(b){ return '<div><dt>'+sizeName(b)+'</dt><dd>£'+price(s.id,b,'1',freq)+'</dd></div>'; }).join('');
+    var b = PRICE[s.id].baths;
+    var note = s.id==='standard'
+      ? 'Per visit with one bathroom, weekly or fortnightly. Monthly visits are the standard price, from £'+price('standard','Studio','1','Monthly')+'. A second bathroom adds £'+b['2']+', a third £'+b['3']+', before the 10% saving.'
+      : 'With one bathroom. A second bathroom adds £'+b['2']+', a third £'+b['3']+'.';
+    return '<li data-rise style="--i:'+i+'"><div class="svc-top"><h3>'+s.name+'</h3><span class="from">from <b class="tab">£'+price(s.id,'Studio','1',freq)+'</b> · '+s.unit.replace(' or fortnightly','')+'</span></div>'+
+      '<p>'+s.line+'</p><dl class="grid-prices">'+cells+'</dl><p class="more-note">'+note+'</p>'+
+      '<button type="button" class="link pick" data-pick="'+s.id+'">Price this clean<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></li>';
+  }).join('');
+  $('#extras-list').innerHTML = EXTRAS.map(function(e){return '<li><span>'+esc(e[0])+'</span><span>£'+e[1]+(e[2]?' <small>'+e[2]+'</small>':'')+'</span></li>'}).join('');
+  $('#alist').innerHTML = AREAS.map(function(a){return '<li><button type="button" aria-pressed="false" data-a="'+a+'">'+a+'</button></li>'}).join('');
+
+  /* days: the next eight days, any day of the week (open Mon–Sun) */
+  var dayFmt = new Intl.DateTimeFormat('en-GB',{weekday:'short'});
+  var dateFmt = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short'});
+  var shortFmt = new Intl.DateTimeFormat('en-GB',{weekday:'short',day:'numeric',month:'short'});
+  var longFmt = new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long'});
+  var today = new Date(); today.setHours(12,0,0,0);
+  var dayHtml = '';
+  for (var d=1; d<=8; d++){
+    var dt = new Date(today.getTime()+d*864e5);
+    dayHtml += '<label class="chip"><input type="radio" name="day" value="'+dt.toISOString().slice(0,10)+'"><span>'+dayFmt.format(dt)+'<b>'+dateFmt.format(dt)+'</b></span></label>';
+  }
+  $('#days').innerHTML = dayHtml;
+
+  /* ---------- state + receipt ---------- */
+  var form = $('#qform');
+  var step = 0, reached = 0;
+  function val(name){var el = form.querySelector('input[name="'+name+'"]:checked'); return el ? el.value : null;}
+  function service(){var id = val('service'); return SERVICES.filter(function(s){return s.id===id})[0];}
+  function extras(){return $$('input[name="extra"]:checked',form).map(function(i){return EXTRAS[+i.value]});}
+  var shownTotal = 210;
+  function countTo(n){
+    var els = $$('[data-total]'), from = shownTotal; shownTotal = n;
+    if (reduce || from === n){ els.forEach(function(el){ el.textContent = '£'+n; }); return; }
+    var t0 = performance.now();
+    (function tick(t){ var k = Math.min(1,(t-t0)/420), e = 1-Math.pow(1-k,3), v = '£'+Math.round(from+(n-from)*e);
+      els.forEach(function(el){ el.textContent = v; }); if (k<1) requestAnimationFrame(tick); })(t0);
+  }
+  function rowsData(compact){
+    var s = service(), ex = extras(), beds = val('beds'), baths = val('baths'), freq = val('freq');
+    var size = (beds==='Studio' ? 'Studio' : beds+' bedroom'+(beds==='1'?'':'s'))+', '+baths+' bathroom'+(baths==='1'?'':'s');
+    if (s.id==='standard') size += freq==='Monthly' ? ', monthly' : ', '+freq.toLowerCase()+', 10% saved';
+    var sp = price(s.id, beds, baths, s.id==='standard' ? freq : null);
+    var rows = [{k:'s-'+s.id, html:'<span>'+s.name+'<small>'+size+'</small></span><span class="amt">£'+sp+'</span>'}];
+    ex.forEach(function(e){rows.push({k:'e-'+e[0], html:'<span>'+esc(e[0])+(e[2]?'<small>'+unitTxt(e)+'</small>':'')+'</span><span class="amt">£'+e[1]+'</span>'})});
+    var day = val('day');
+    if (reached>=1 && day){
+      var dt = new Date(day+'T12:00:00');
+      rows.push({k:'d-'+day+val('tod'), html:'<span>Preferred day<small>'+(compact ? shortFmt.format(dt).replace(',','') : longFmt.format(dt))+', '+val('tod')+'</small></span><span class="amt">to confirm</span>'});
+    }
+    var pc = $('#pc').value.trim().toUpperCase();
+    if (reached>=1 && pcValid(pc)) rows.push({k:'p-'+pc, html:'<span>Postcode</span><span class="amt">'+esc(pc)+'</span>'});
+    return {rows:rows, total: sp + ex.reduce(function(a,e){return a+e[1]},0)};
+  }
+  var lastKeys = [];
+  function render(){
+    var s = service(), beds = val('beds'), baths = val('baths'), freq = val('freq');
+    $('#freq-set').hidden = s.id !== 'standard';
+    SERVICES.forEach(function(x){
+      $('[data-pr="'+x.id+'"]').textContent = '£'+price(x.id, beds, baths, x.id==='standard' ? freq : null)+(x.id==='standard' ? ' a visit' : '');
+    });
+    var data = rowsData();
+    $('#rows').innerHTML = data.rows.map(function(r){ return '<li data-k="'+esc(r.k)+'"'+(lastKeys.indexOf(r.k)>-1?' style="animation:none"':'')+'>'+r.html+'</li>'; }).join('');
+    lastKeys = data.rows.map(function(r){return r.k});
+    countTo(data.total);
+  }
+  form.addEventListener('change', render);
+
+  /* extras: four common ones first, the rest one tap away */
+  $('#more').addEventListener('click', function(){
+    var open = this.getAttribute('aria-expanded')!=='true';
+    this.setAttribute('aria-expanded', open); $('#extras').hidden = !open;
+  });
+  $('#xall').addEventListener('click', function(){
+    var open = this.getAttribute('aria-expanded')!=='true';
+    this.setAttribute('aria-expanded', open); $('#xrest').hidden = !open;
+    this.textContent = open ? 'Show fewer extras' : 'Show all 12 extras';
+  });
+
+  /* postcode: accept any common UK format; tell the visitor if it is on the list */
+  function outward(pc){ var m = pc.replace(/\s+/g,'').match(/^([A-Z]{1,2}\d[A-Z\d]?)(\d[A-Z]{2})?$/); return m ? m[1] : null; }
+  function pcValid(pc){ return !!outward(pc); }
+  $('#pc').addEventListener('input', function(){
+    var pc = this.value.trim().toUpperCase(), o = outward(pc), h = $('#pc-hint');
+    $('#pc-err').textContent=''; this.removeAttribute('aria-invalid');
+    h.className = 'hint';
+    if (!o){ h.textContent=''; return; }
+    if (LISTED.indexOf(o)>-1){ h.textContent = o+' is on our list.'; h.className='hint ok'; }
+    else if (/^EH/.test(o)){ h.textContent = 'We cover all of Edinburgh and the surrounding towns.'; h.className='hint ok'; }
+    else h.textContent = "Not on the list? Ask us. We usually can.";
+    render();
+  });
+
+  /* ---------- bottom bar: price + next step while the quote is on screen (phones) ---------- */
+  var bar = $('#bar'), quoteInView = false;
+  var NEXT_LABEL = ['Pick a day','Your details'];
+  function syncBar(){
+    var q = phone.matches && quoteInView && step < 3;
+    var on = $('#bar-quote'), off = $('#bar-contact');
+    if (!q){ var t = on; on = off; off = t; }
+    on.removeAttribute('aria-hidden'); on.inert = false;
+    off.setAttribute('aria-hidden','true'); off.inert = true;
+    bar.setAttribute('aria-label', q ? 'Your price and next step' : 'Contact');
+    $('#bar-next').hidden = step >= 2; $('#bar-send').hidden = step !== 2;
+    if (step < 2) $('#bar-next-t').textContent = NEXT_LABEL[step];
+  }
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(list){ quoteInView = list[0].isIntersecting; syncBar(); },
+      {rootMargin:'-68px 0px -72px 0px'}).observe(form);
+  }
+  if (phone.addEventListener) phone.addEventListener('change', syncBar);
+  $('#bar-next').addEventListener('click', function(){ if (step < 2 && check(step)) go(step+1, true); });
+
+  /* ---------- steps ---------- */
+  function go(n, focus){
+    step = n; reached = Math.max(reached, n);
+    $$('.pane',form).forEach(function(p){ p.hidden = +p.dataset.pane !== n; });
+    $$('.steps button',form).forEach(function(b){
+      var i = +b.dataset.go;
+      if (i===n) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');
+      b.disabled = i>reached || n===3; b.classList.toggle('done', i<n || n===3);
+    });
+    form.classList.toggle('is-done', n===3);
+    render(); syncBar();
+    if (focus){
+      var top = form.getBoundingClientRect().top + window.scrollY - 84;
+      if (form.getBoundingClientRect().top < 76) window.scrollTo({top:top, behavior: reduce?'auto':'smooth'});
+      if (n===3) setTimeout(function(){ $('#done').focus({preventScroll:true}); }, 60);
+      else if (n===2) setTimeout(function(){ $('#nm').focus({preventScroll:true}); }, 60);
+    }
+  }
+  function err(id, msg, input){ $(id).textContent = msg; if (input){ input.setAttribute('aria-invalid', msg?'true':'false'); } return !msg; }
+  /* check(n) checks the fields of step n before moving on */
+  function check(n){
+    if (n===1){
+      var ok1 = err('#day-err', val('day') ? '' : 'Pick a day, or call us for another date.');
+      var pc = $('#pc').value.trim().toUpperCase();
+      /* the postcode is optional (we can ask when we call); if one is typed it must look like a postcode */
+      var ok2 = err('#pc-err', (!pc || pcValid(pc)) ? '' : 'Check the postcode, for example EH10 4AA.', $('#pc'));
+      if (!ok2 && ok1) $('#pc').focus();
+      return ok1 && ok2;
+    }
+    if (n===2){
+      var nm = $('#nm'), ct = $('#ct');
+      var a = err('#nm-err', nm.value.trim().length>1 ? '' : 'Tell us your name.', nm);
+      var c = ct.value.trim(), digits = c.replace(/\D/g,'');
+      var b = err('#ct-err', (/^\S+@\S+\.\S+$/.test(c) || digits.length>=10) ? '' : 'Add a mobile number or an email address.', ct);
+      if (!a) nm.focus(); else if (!b) ct.focus();
+      return a && b;
+    }
+    return true;
+  }
+  form.addEventListener('click', function(e){
+    var nx = e.target.closest('[data-next]'), bk = e.target.closest('[data-go]');
+    if (nx){ var to = +nx.dataset.next; if (check(to-1)) go(to, true); }
+    else if (bk && !bk.disabled){ go(+bk.dataset.go, true); }
+  });
+  $('#days').addEventListener('change', function(){ $('#day-err').textContent=''; });
+  /* the demo never sends anything: it only shows the thank-you state */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (step < 2){ if (check(step)) go(step+1, true); return; }
+    if (!check(2)) return;
+    var first = $('#nm').value.trim().split(/\s+/)[0];
+    var dt = new Date(val('day')+'T12:00:00');
+    var data = rowsData(true);
+    $('#done-h').textContent = 'Thanks, '+first+". We'll be in touch.";
+    $('#done-p').textContent = "We'll call or message you about "+longFmt.format(dt)+' in the '+val('tod')+' to confirm a time and your price, usually within a few hours.';
+    $('#sum-day').textContent = shortFmt.format(dt).replace(',', '');
+    $('#sum-rows').innerHTML = data.rows.map(function(r){ return '<li>'+r.html+'</li>'; }).join('');
+    $('#sum-total').textContent = '£'+data.total;
+    go(3, true);
+  });
+  $('#again').addEventListener('click', function(){
+    form.reset(); $('#pc-hint').textContent=''; reached = 0; lastKeys=[];
+    $('#done-h').textContent = "Thanks, we'll be in touch.";
+    go(0, true);
+  });
+
+  /* "Price this clean" in the prices section picks the service in the quote */
+  $('#svc-list').addEventListener('click', function(e){
+    var b = e.target.closest('[data-pick]'); if (!b) return;
+    if (step===3) $('#again').click();
+    $('#s-'+b.dataset.pick).checked = true; go(0); render();
+    $('#quote').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+    setTimeout(function(){ $('#s-'+b.dataset.pick).focus({preventScroll:true}); }, reduce?0:600);
+  });
+
+  /* Call / WhatsApp: on the live site these open the phone and WhatsApp. In this example they only respond to the press. */
+  $$('.js-call, .js-wa').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); }); });
+
+  render(); syncBar();
+
+  /* ---------- areas: our own sketch; the list and the sketch light up the same area ---------- */
+  /* rough positions around the city centre (205,150), not to scale; label to the right (r) or left (l) */
+  var POS = {Leith:[262,66,'r'],Trinity:[186,58,'l'],Stockbridge:[180,104,'l'],Portobello:[332,124,'l'],Newington:[244,190,'r'],
+    Bruntsfield:[190,196,'l'],Morningside:[176,236,'r'],Colinton:[104,262,'r'],Murrayfield:[132,128,'l'],Corstorphine:[60,164,'r']};
+  $('#pts').innerHTML = AREAS.map(function(a){
+    var p = POS[a], r = p[2]==='r';
+    return '<g class="pt" data-area="'+a+'"><circle class="ring" cx="'+p[0]+'" cy="'+p[1]+'" r="9"/><circle class="dot" cx="'+p[0]+'" cy="'+p[1]+'" r="4.5"/>'+
+      '<text x="'+(p[0]+(r?13:-13))+'" y="'+(p[1]+4)+'" text-anchor="'+(r?'start':'end')+'">'+a+'</text></g>';
+  }).join('');
+  var pts = $$('#pts .pt'), cur = -1, timer = null;
+  function show(i){
+    if (i===cur) return;
+    if (cur>-1) pts[cur].classList.remove('on');
+    cur = i; pts[cur].classList.add('on');
+    $('#cap').textContent = AREAS[cur];
+    $$('#alist button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.a===AREAS[cur] ? 'true':'false'); });
+  }
+  function startCycle(){ if (reduce || timer) return; timer = setInterval(function(){ if (!document.hidden) show((cur+1)%pts.length); }, 2800); }
+  function stopCycle(){ clearInterval(timer); timer = null; }
+  show(AREAS.indexOf('Stockbridge'));
+  $('#alist').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    stopCycle(); show(AREAS.indexOf(b.dataset.a));
+  });
+
+  /* ---------- entrances, once per element ---------- */
+  var els = $$('[data-rise]');
+  if (!('IntersectionObserver' in window) || reduce){ els.forEach(function(el){ el.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function(list){
+      list.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);
+        if (en.target.closest('#areas')) startCycle(); } });
+    }, {rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ els.forEach(function(el){ if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); }); }, 1200);
+  }
+})();
+</script>
+</body>
+</html>

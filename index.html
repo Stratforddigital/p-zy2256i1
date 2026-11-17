@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Silverpoint Cleaning: a short review and an example redesign</title>
+<style>
+  :root { --ink:#0f1b2d; --muted:#4a5a6e; --line:#d9e1ea; --bg:#f6f8fb; --brand:#0a6579; --brand-ink:#ffffff; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); }
+  body { font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: clamp(26px, 4.6vw, 40px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .lead { color: var(--muted); margin: 0 0 28px; max-width: 62ch; }
+  .video { background: #0f1b2d; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 50px rgba(15,27,45,.18); }
+  video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #0f1b2d; }
+  .note { color: var(--muted); font-size: 14px; margin: 12px 2px 0; }
+  .cta { margin: 32px 0 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; background: var(--brand); color: var(--brand-ink); text-decoration: none; font-weight: 600; }
+  .btn:focus-visible { outline: 3px solid #7cc3d3; outline-offset: 2px; }
+  @media (hover: hover) { .btn:hover { filter: brightness(1.08); } }
+  .label { color: var(--muted); font-size: 14px; margin: 0 0 40px; }
+  .last { border-top: 1px solid var(--line); padding-top: 20px; color: var(--muted); margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Silverpoint Cleaning: a short review and an example redesign</h1>
+  <p class="lead">A 2-minute video review of silverpointcleaning.co.uk, and the site rebuilt as an example, made for the team at Silverpoint Cleaning by Stratford Digital.</p>
+
+  <div class="video">
+    <video controls preload="metadata" playsinline poster="poster.jpg">
+      <source src="review.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="cta">
+    <a class="btn" href="example/">Open the example redesign</a>
+  </div>
+  <p class="label">Example redesign by Stratford Digital. Not the live site.</p>
+
+  <p class="last">Questions? Just reply to our email.</p>
+</main>
+</body>
+</html>
